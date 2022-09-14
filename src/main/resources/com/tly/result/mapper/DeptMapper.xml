@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tly.result.mapper.DeptMapper">
+<!-- Dept getEmpAndDept(@Param("deptId") Integer deptId);-->
+    <select id="getEmpAndDept" resultType="Dept">
+        select *from dept where dept_id=#{deptId}
+    </select>
+    
+    <resultMap id="getEmpAndDeptResultMap" type="Dept">
+        <id column="dept_id" property="deptId"></id>
+        <result column="dept_name" property="deptName"></result>
+        <collection property="emps" ofType="Emp">
+            <result column="emp_id" property="empId"></result>
+            <result column="emp_name" property="empName"></result>
+            <result column="age" property="age"></result>
+            <result column="sex" property="sex"></result>
+        </collection>
+    </resultMap>
+<!--Dept getEmpAndDeptByDeptId(@Param("deptId") Integer deptId);-->
+    <select id="getEmpAndDeptByDeptId" resultMap="getEmpAndDeptResultMap">
+        select dept.*,emp.* from emp left join dept on dept.dept_id=emp.dept_id
+        where dept.dept_id=#{deptId};
+    </select>
+</mapper>

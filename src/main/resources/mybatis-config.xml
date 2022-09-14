@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--(properties?,settings?,typeAliases?,
+    typeHandlers?,objectFactory?,objectWrapperFactory?,
+    reflectorFactory?,plugins?,environments?,databaseIdProvider?,
+    mappers?)"-->
+    <!--映入properties文件，在当前文件中使用${key}的方式访问value-->
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!-- 输出日志配置 -->
+        <setting name="logImpl" value="LOG4J" />
+        <!--    将下划线映射为驼峰-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--  全局启用或者禁用延迟加载。当禁用时，所有关联对象都会及时加载 。-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 指定mybatis 如何自动映射列到属性：
+		PARTIAL 只会自动映射简单，没有嵌套的结果。
+		FILL 会自动映射任意复杂的结果（嵌套的或者其他情况） -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <!-- 设置超时时间，它决定驱动等待一个数据库相应的时间 -->
+        <setting name="defaultStatementTimeout" value="25"/>
+    </settings>
+    <!--设置别名类型-->
+    <typeAliases>
+        <package name="com.tly.result.pojo"/>
+    </typeAliases>
+    
+    <!--配置链接数据库的环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+<!-- <property name="driver" value="${jdbc.driver}"/>-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入映射文件-->
+    <mappers>
+        <package name="com.tly.result.mapper"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,20 @@
+package com.tly.spring.Controller;
+
+import com.tly.spring.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class UserController {
+    @Autowired
+    private UserService userService;
+    public void saveUser(){ userService.saveUser(); }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+}

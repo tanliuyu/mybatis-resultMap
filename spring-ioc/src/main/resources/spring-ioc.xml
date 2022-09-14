@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="studentOne" class="com.tly.spring.Bean.Students">
+                <property name="sid" value="001"></property>
+                <property name="sex" value="男"></property>
+                <property name="sName" value="tan"></property>
+                <property name="age" value="20"></property>
+    </bean>
+    <bean id="studentTwo" class="com.tly.spring.Bean.Students">
+                <property name="sid" value="002"></property>
+                <property name="sex" value="男"></property>
+                <property name="sName" value="wangyu"></property>
+                <property name="age" value="20"></property>
+    </bean>
+    <bean id="studentThree" class="com.tly.spring.Bean.Students">
+                <property name="sid" value="003"></property>
+                <property name="sex" value="女"></property>
+                <property name="sName" value="WANG"></property>
+                <property name="age" value="20"></property>
+    </bean>
+
+    <bean id="studentFour" class="com.tly.spring.Bean.Students">
+        <property name="sid" value="1004"></property>
+        <property name="sex" value="男"></property>
+        <property name="sName" value="赵六"></property>
+        <property name="age" value="22"></property>
+        <property name="clazz">
+            <!-- 在一个bean中再声明一个bean就是内部bean -->
+            <!-- 内部bean只能用于给属性赋值，不能在外部通过IOC容器获取，因此可以省略id属性 -->
+            <bean id="clazzInner" class="com.tly.spring.Bean.Clazz">
+                <property name="clazzId" value="2222"></property>
+                <property name="clazzName" value="远大前程班"></property>
+            </bean>
+        </property>
+        <property name="hobby">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </array>
+        </property>
+    </bean>
+    <bean id="clazzTwo" class="com.tly.spring.Bean.Clazz">
+        <property name="clazzId" value="4444"></property>
+        <property name="clazzName" value="Javaee0222"></property>
+        <property name="students">
+        <list>
+            <ref bean="studentOne"></ref>
+            <ref bean="studentTwo"></ref>
+            <ref bean="studentThree"></ref>
+        </list>
+        </property>
+    </bean>
+</beans>
